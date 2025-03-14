@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>词的发展历程</title>
+    <style>
+        /* 原有基础样式保持不变 */
+        /* 新增词史相关样式 */
+        .timeline {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent 30%, #ffd700 40%, #ffb300 60%, transparent 70%);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid transparent;
+            border-radius: 15px;
+            position: relative;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .timeline-item:hover {
+            border-left-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-left: 30%;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-right: 30%;
+        }
+
+        .period-label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ffd700;
+            color: #0a0a0a;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .poetry-example {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 1rem;
+        }
+
+        .poetry-example img {
+            max-width: 150px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::after {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                margin-left: 0;
+                margin-right: 0;
+                padding-left: 40px;
+            }
+
+            .period-label {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <h1>词的发展历程</h1>
+    </nav>
+
+    <section class="banner">
+        <div class="container">
+            <h2>词的千年演变</h2>
+            <p>从市井歌谣到文学高峰的蜕变</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="timeline">
+            <div class="timeline-item" data-period="唐五代">
+                <div class="period-label">唐五代</div>
+                <h4>民间词与文人词的萌芽</h4>
+                <p>词起源于隋唐燕乐，敦煌曲子词展现民间疾苦，温庭筠确立婉约词风。</p>
+                <div class="poetry-example">
+                    <img src="https://source.unsplash.com/random/150x150/?tang-dynasty" alt="敦煌壁画">
+                    <div>
+                        <h5>《菩萨蛮·小山重叠金明灭》</h5>
+                        <p>温庭筠</p>
+                        <p>新帖绣罗襦，双双金鹧鸪。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item" data-period="北宋">
+                <div class="period-label">北宋</div>
+                <h4>市井新声与士大夫之词</h4>
+                <p>柳永开拓慢词长调，苏轼突破音律束缚，词成为独立文学体裁。</p>
+                <div class="poetry-example">
+                    <img src="https://source.unsplash.com/random/150x150/?north-song" alt="清明上河图">
+                    <div>
+                        <h5>《雨霖铃·寒蝉凄切》</h5>
+                        <p>柳永</p>
+                        <p>今宵酒醒何处？杨柳岸，晓风残月。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item" data-period="南宋">
+                <div class="period-label">南宋</div>
+                <h4>家国情怀与艺术巅峰</h4>
+                <p>辛弃疾以词言志，李清照集婉约之大成，姜夔开创格律词派。</p>
+                <div class="poetry-example">
+                    <img src="https://source.unsplash.com/random/150x150/?south-song" alt="南宋园林">
+                    <div>
+                        <h5>《青玉案·元夕》</h5>
+                        <p>辛弃疾</p>
+                        <p>众里寻他千百度，蓦然回首，那人却在灯火阑珊处。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="directory.html" class="cta-button">探索更多词牌</a>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 词韵千年 | 版权所有</p>
+    </footer>
+
+    <script>
+        // 时间轴动态效果
+        const items = document.querySelectorAll('.timeline-item');
+        let isAnimating = false;
+
+        window.addEventListener('scroll', function() {
+            if (!isAnimating) {
+                items.forEach(item => {
+                    const rect = item.getBoundingClientRect();
+                    if (rect.top < window.innerHeight * 0.8) {
+                        isAnimating = true;
+                        item.style.animationDelay = `${Math.random() * 0.5}s`;
+                        setTimeout(() => {
+                            isAnimating = false;
+                        }, 1000);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
